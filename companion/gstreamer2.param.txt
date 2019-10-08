@@ -1,0 +1,5 @@
+! jpegdec
+! videoconvert
+! x264enc tune=zerolatency
+! rtph264pay
+! udpsink host=192.168.2.39 port=5600
