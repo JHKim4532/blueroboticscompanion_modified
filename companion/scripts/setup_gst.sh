@@ -21,7 +21,9 @@ exec 2>&1
 # grep -q BCM270 /proc/cpuinfo && sudo apt-get update && sudo apt-get upgrade -y --force-yes
 
 # Get the required libraries
-sudo apt-get install -y --force-yes build-essential
+sudo apt-get install -y --force-yes build-essential autotools-dev automake autoconf autopoint libxml2-dev pkg-config bison flex python3 \
+                                    liblzma-dev libcurl4-openssl-dev libacl1-dev libfuse-dev libtool libgtk-3-dev libasound2-dev gtk-doc-tools python3-dev \
+                                    
 
 
 # get the repos if they're not already there

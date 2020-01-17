@@ -35,23 +35,22 @@ popd
 
 # install MAVLink tools
 sudo pip install mavproxy dronekit dronekit-sitl # also installs pymavlink
-
 # install screen
 sudo apt-get install -y screen
 
 # web ui dependencies, separate steps to avoid conflicts
-sudo apt-get install -y node
-sudo apt-get install -y nodejs-legacy
-sudo apt-get install -y npm
+# sudo apt-get install -y node
+# sudo apt-get install -y nodejs-legacy
+# sudo apt-get install -y npm
 
 # node updater
-sudo npm install n -g
+# sudo npm install n -g
 
 # Get recent version of node
-sudo n 5.6.0
+# sudo n 5.6.0
 
 # browser based terminal
-sudo npm install tty.js -g
+# sudo npm install tty.js -g
 
 # clone bluerobotics companion repository
 # git clone https://github.com/bluerobotics/companion.git $HOME/companion
@@ -63,6 +62,12 @@ sudo npm install tty.js -g
 # Disable camera LED
 sudo sed -i '\%disable_camera_led=1%d' /boot/config.txt
 sudo sed -i '$a disable_camera_led=1' /boot/config.txt
+
+# Enable UART 1
+sudo sed -i '\%enable_uart=%d' /boot/config.txt
+sudo sed -i '\%dtoverlay=pi3-disable-bt' /boot/config.txt
+sudo sed -i '$a enable_uart=1' /boot/config.txt
+sudo sed -i '$a dtoverlay=pi3-disable-bt' /boot/config.txt
 
 # Enable RPi camera interface
 sudo sed -i '\%start_x=%d' /boot/config.txt
