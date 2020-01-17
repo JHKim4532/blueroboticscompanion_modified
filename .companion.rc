@@ -3,17 +3,17 @@ export COMPANION_DIR=/home/pi/companion
 # copy default parameters if neccessary
 cd $COMPANION_DIR/params
 
-for default_param_file in *; do
-    if [[ $default_param_file == *".param.default" ]]; then
-        param_file="/home/pi/"$(echo $default_param_file | sed "s/.default//")
-        if [ ! -e "$param_file" ]; then
-            cp $default_param_file $param_file
-        fi
-    fi
-done
+#for default_param_file in *; do
+#    if [[ $default_param_file == *".param.default" ]]; then
+#        param_file="/home/pi/"$(echo $default_param_file | sed "s/.default//")
+#        if [ ! -e "$param_file" ]; then
+#            cp $default_param_file $param_file
+#        fi
+#    fi
+#done
 
 if [ ! -f /home/pi/.updating ]; then
-	sudo python $COMPANION_DIR/tools/ping_enumerator.py || true
+#	sudo python $COMPANION_DIR/tools/ping_enumerator.py || true
 	if [ -d /dev/serial/ping ]; then
 		sudo -H -u pi screen -dm -S pingproxy pingproxy.py --device $(ls -d /dev/serial/ping/Ping1* | head -1)
 		# Uncomment the next line to enable Ping1D as a range finder
@@ -21,11 +21,11 @@ if [ ! -f /home/pi/.updating ]; then
 	fi
 	sudo -H -u pi screen -dm -S mavproxy $COMPANION_DIR/tools/telem.py
 	sudo -H -u pi screen -dm -S video $COMPANION_DIR/tools/streamer.py 
-	sudo -H -u pi screen -dm -S commrouter $COMPANION_DIR/tools/comm_router.py
-	# sudo -H -u pi screen -dm -S nmearx $COMPANION_DIR/tools/nmea-receiver.py [GPS]
-	# sudo -H -u pi screen -dm -S wldriver $COMPANION_DIR/tools/underwater-gps.py --ip=waterlinked.local --port=80 [GPS]
-	# sudo -H -u pi screen -dm -S bridgemanager $COMPANION_DIR/tools/ping360_bridge_manager.py [SONAR]
-	# sudo -H -u pi screen -dm -S mavlink2rest $COMPANION_DIR/tools/mavlink2rest --connect udpin:127.0.0.1:9002 --server 0.0.0.0:4777 [What...]
+#	sudo -H -u pi screen -dm -S commrouter $COMPANION_DIR/tools/comm_router.py
+#	sudo -H -u pi screen -dm -S nmearx $COMPANION_DIR/tools/nmea-receiver.py [GPS]
+#	sudo -H -u pi screen -dm -S wldriver $COMPANION_DIR/tools/underwater-gps.py --ip=waterlinked.local --port=80 [GPS]
+#	sudo -H -u pi screen -dm -S bridgemanager $COMPANION_DIR/tools/ping360_bridge_manager.py [SONAR]
+#	sudo -H -u pi screen -dm -S mavlink2rest $COMPANION_DIR/tools/mavlink2rest --connect udpin:127.0.0.1:9002 --server 0.0.0.0:4777 [What...]
 else
 	sudo -H -u pi echo 'UPDATE FAILED!' >> /home/pi/.update_log
 	rm -f /home/pi/.updating

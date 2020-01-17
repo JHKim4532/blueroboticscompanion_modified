@@ -23,37 +23,41 @@ exec 2>&1
 # Get the required libraries
 sudo apt-get install -y --force-yes build-essential autotools-dev automake autoconf autopoint libxml2-dev pkg-config bison flex python3 \
                                     liblzma-dev libcurl4-openssl-dev libacl1-dev libfuse-dev libtool libgtk-3-dev libasound2-dev gtk-doc-tools python3-dev \
-                                    
+                                    gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav \
+                                    gstreamer1.0-tools gstreamer1.0-dev
+
+sudo apt install -y gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk gstreamer1.0-qt5 gstreamer1.0-pulseaudio gstreamer1.0-x \
+                    gstreamer1.0-doc
 
 
 # get the repos if they're not already there
-cd $HOME
-[ ! -d src ] && mkdir src
-cd src
-[ ! -d gstreamer ] && mkdir gstreamer
-cd gstreamer
+#cd $HOME
+#[ ! -d src ] && mkdir src
+#cd src
+#[ ! -d gstreamer ] && mkdir gstreamer
+#cd gstreamer
 
 # get repos if they are not there yet
-[ ! -d gstreamer ] && git clone git://anongit.freedesktop.org/git/gstreamer/gstreamer
+#[ ! -d gstreamer ] && git clone git://anongit.freedesktop.org/git/gstreamer/gstreamer
 #[ ! -d gst-plugins-base ] && git clone git://anongit.freedesktop.org/git/gstreamer/gst-plugins-base
 #[ ! -d gst-plugins-good ] && git clone git://anongit.freedesktop.org/git/gstreamer/gst-plugins-good
 #[ ! -d gst-plugins-bad ] && git clone git://anongit.freedesktop.org/git/gstreamer/gst-plugins-bad
 #[ ! -d gst-plugins-ugly ] && git clone git://anongit.freedesktop.org/git/gstreamer/gst-plugins-ugly
 #[ ! -d gst-libav ] && git clone git://anongit.freedesktop.org/git/gstreamer/gst-libav
 #[ ! -d gst-omx ] && git clone git://anongit.freedesktop.org/git/gstreamer/gst-omx
-[ ! -d gst-python ] && git clone git://anongit.freedesktop.org/git/gstreamer/gst-python
+#[ ! -d gst-python ] && git clone git://anongit.freedesktop.org/git/gstreamer/gst-python
 #[ ! $RPI ] && [ ! -d gstreamer-vaapi ] && git clone git://gitorious.org/vaapi/gstreamer-vaapi.git
 
 export LD_LIBRARY_PATH=/usr/local/lib/
 # checkout branch (default=master) and build & install
-cd gstreamer
-git checkout -t origin/$BRANCH || true
-sudo make -j4 uninstall || true
-git pull
-./autogen.sh --disable-gtk-doc
-make -j4
-sudo make -j4 install
-cd ..
+#cd gstreamer
+#git checkout -t origin/$BRANCH || true
+#sudo make -j4 uninstall || true
+#git pull
+#./autogen.sh --disable-gtk-doc
+#make -j4
+#sudo make -j4 install
+#cd ..
 
 #cd gst-plugins-base
 #git checkout -t origin/$BRANCH || true
@@ -112,15 +116,15 @@ cd ..
 #cd ..
 
 # python bindings
-cd gst-python
-git checkout -t origin/$BRANCH || true
-export LD_LIBRARY_PATH=/usr/local/lib/ 
-sudo make -j4 uninstall || true
-git pull
-PYTHON=/usr/bin/python3 ./autogen.sh
-make -j4
-sudo make -j4 install
-cd ..
+#cd gst-python
+#git checkout -t origin/$BRANCH || true
+#export LD_LIBRARY_PATH=/usr/local/lib/ 
+#sudo make -j4 uninstall || true
+#git pull
+#PYTHON=/usr/bin/python3 ./autogen.sh
+#make -j4
+#sudo make -j4 install
+#cd ..
 
 # omx support
 #cd gst-omx
@@ -143,16 +147,16 @@ cd ..
 #cd ..
 
 # VAAPI, not for RPI
-if [[ $RPI -ne 1 ]]; then
-    cd gstreamer-vaapi
-    sudo make -j4 uninstall || true
-    git pull
-    ./autogen.sh
-    make -j4
-    sudo make -j4 install
-    cd ..
-fi
+#if [[ $RPI -ne 1 ]]; then
+#    cd gstreamer-vaapi
+#    sudo make -j4 uninstall || true
+#    git pull
+#    ./autogen.sh
+#    make -j4
+#    sudo make -j4 install
+#    cd ..
+#fi
 
-sudo rm -rf $HOME/src
+#sudo rm -rf $HOME/src
 
 echo export LD_LIBRARY_PATH=/usr/local/lib/ >> $HOME/.bashrc

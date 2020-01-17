@@ -13,7 +13,8 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq rpi-update
 sudo rpi-update
 
 # install python and pip
-sudo apt-get install -y python-dev python-pip python-libxml2 python-lxml libcurl4-openssl-dev
+sudo apt-get install -y python-matplotlib python-opencv python-numpy python-wxgtk3.0 python-dev python-pip python-libxml2 python-lxml libcurl4-openssl-dev \
+                        python3-opencv python3-pip python3-matplotlib python3-lxml
 
 # dependencies
 sudo apt-get install -y libxml2-dev libxslt1-dev
