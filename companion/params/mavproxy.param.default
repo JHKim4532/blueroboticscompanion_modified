@@ -1,0 +1,10 @@
+--master=/dev/ttyAMA0,115200
+--load-module='DepthOutput'
+--cmd="set heartbeat 0"
+--out udpin:localhost:9000
+--out udpbcast:192.168.1.255:14550
+--streamrate=6
+--mav20
+--aircraft telemetry
+
+
