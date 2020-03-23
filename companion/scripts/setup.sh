@@ -13,28 +13,29 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq rpi-update
 sudo rpi-update
 
 # install python and pip
-sudo apt-get install -y python-dev python-pip python-libxml2 python-lxml libcurl4-openssl-dev
+sudo apt-get install -y python-dev python-pip python3-dev python3-pip python-libxml2 python-lxml python3-lxml libcurl4-openssl-dev python3-wxgtk3.0 python3-opencv python3-matplotlib 
 
 # dependencies
 sudo apt-get install -y libxml2-dev libxslt1-dev
 
-sudo pip install future
+sudo pip install future pymavlink
+sudo pip3 install future pymavlink
 
 # install git
 sudo apt-get install -y git
 
 # download and install pymavlink from source in order to have up to date ArduSub support
-git clone https://github.com/mavlink/mavlink.git $HOME/mavlink
-
-pushd mavlink
-git submodule init && git submodule update --recursive
-pushd pymavlink
-sudo python setup.py build install
-popd
-popd
+#git clone https://github.com/mavlink/mavlink.git $HOME/mavlink
+#pushd mavlink
+#git submodule init && git submodule update --recursive
+#pushd pymavlink
+#sudo python setup.py build install
+#popd
+#popd
 
 # install MAVLink tools
 sudo pip install mavproxy dronekit dronekit-sitl # also installs pymavlink
+sudo pip3 install mavproxy dronekit dronekit-sitl
 # install screen
 sudo apt-get install -y screen
 
@@ -73,7 +74,7 @@ sudo sed -i '$a dtoverlay=pi3-disable-bt' /boot/config.txt
 sudo sed -i '\%start_x=%d' /boot/config.txt
 sudo sed -i '\%gpu_mem=%d' /boot/config.txt
 sudo sed -i '$a start_x=1' /boot/config.txt
-sudo sed -i '$a gpu_mem=128' /boot/config.txt
+sudo sed -i '$a gpu_mem=256' /boot/config.txt
 
 # source startup script
 S1="$HOME/companion/scripts/expand_fs.sh"
