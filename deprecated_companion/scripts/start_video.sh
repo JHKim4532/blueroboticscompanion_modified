@@ -46,7 +46,7 @@ gstOptions=$(tr '\n' ' ' < $HOME/gstreamer2.param)
 #fi
 
 echo "attempting device $DEVICE with width $WIDTH height $HEIGHT framerate $FRAMERATE options $gstOptions"
-gst-launch-1.0 -vvv v4l2src device=$DEVICE ! video/x-h264, width=$WIDTH, height=$HEIGHT, framerate=$FRAMERATE/1 $gstOptions
+gst-launch-1.0 -vvv v4l2src device=$DEVICE ! "video/x-h264,width=$WIDTH,height=$HEIGHT,type=video,framerate=$FRAMERATE/1" $gstOptions
 
 if [ $? != 0 ]; then
     echo "Device is not capable of specified format, using device current settings instead"

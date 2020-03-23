@@ -8,7 +8,7 @@ cd $HOME
 if [ -e mavproxy.param ]; then
     paramFile="mavproxy.param"
 else
-    paramFile="companion_mod/params/mavproxy.param.default"
+    paramFile="companion/params/mavproxy.param.default"
 fi
 
 xargs -a $paramFile mavproxy.py
